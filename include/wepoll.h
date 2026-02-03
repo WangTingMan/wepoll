@@ -1,7 +1,27 @@
 #ifndef WEPOLL_H_
 #define WEPOLL_H_
 
+#define USE_WEPOLL_AS_DLL
+
+#ifdef USE_WEPOLL_AS_DLL
+#if defined(WIN32) || defined(_MSC_VER)
+
+#if defined(WEPOLL_EXPORTS)
+#define WEPOLL_EXPORT __declspec(dllexport)
+#else
+#define WEPOLL_EXPORT __declspec(dllimport)
+#endif  // defined(WEPOLL_EXPORTS)
+
+#else  // defined(WIN32)
+#if defined(WEPOLL_EXPORTS)
+#define WEPOLL_EXPORT __attribute__((visibility("default")))
+#else
+#define WEPOLL_EXPORT
+#endif  // defined(WEPOLL_EXPORTS)
+#endif
+#else
 #include "config-external.h"
+#endif
 
 #include <stdint.h>
 
